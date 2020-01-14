@@ -1,2 +1,8 @@
+# dependencies
 node_modules
+
+# tests
+__snapshots__
+
+#misc
 .vscode
