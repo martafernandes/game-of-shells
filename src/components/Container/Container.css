@@ -1,0 +1,7 @@
+.container {
+    background: radial-gradient(ellipse at top, #deebff, transparent), radial-gradient(ellipse at bottom, #555, transparent);
+    border-radius: 50% 50% 10% 10%;
+    flex-wrap: wrap;
+    height: 6rem;
+    width: 6rem;
+}

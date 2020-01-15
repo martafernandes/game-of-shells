@@ -3,6 +3,7 @@ import React from 'react';
 import constants from '../../config/constants';
 import Button from '../Button/Button';
 import Ball from '../Ball/Ball';
+import ContainerBoard from '../ContainerBoard/ContainerBoard';
 
 import './App.css';
 
@@ -15,6 +16,7 @@ function App() {
       <div>
         <Button label="cenas" onClick={() => console.log('cenas**')} />
         <Ball isDisplayed={true} />
+        <ContainerBoard />
       </div>
     </div>
   );
