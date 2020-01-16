@@ -5,14 +5,12 @@ import PropTypes from 'prop-types';
 import styles from "./Container.css";
 
 const Container = ({ onClick, content }) => (
-    <div className="container">
-        <figure
-            className="shell"
-            onClick={onClick}
-        >
-                {content}
-        </figure>
-    </div>
+    <figure
+        className="container"
+        onClick={onClick}
+    >
+            {content}
+    </figure>
 );
 
 Container.propTypes = {

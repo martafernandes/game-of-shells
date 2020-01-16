@@ -40,7 +40,6 @@ const ContainerBoard = () => {
     const shuffleGame = () => {
         toggleBallVisible(false);
         toggleButtonVisible(true);
-        setStep(start);
     }
 
     const onClickButton = () => {
