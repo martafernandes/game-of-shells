@@ -9,4 +9,10 @@ describe('Ball Component', () => {
 
         expect(ball).toMatchSnapshot();
     });
+
+    it('it does not render the component if the flag to display is set to false', () => {
+        const ball = shallow(<Ball isDisplayed={false}/>);
+
+        expect(ball.find('figure')).toHaveLength(0);
+    });
 });

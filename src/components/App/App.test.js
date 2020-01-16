@@ -1,9 +1,20 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import { shallow } from 'enzyme';
 
-test('renders learn react link', () => {
-/*  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();*/
+import App from './App';
+import GameBoard from '../GameBoard/GameBoard';
+
+describe('App Component', () => {
+    it('renders the component correctly', () => {
+        const app = shallow(<App />);
+
+        expect(app).toMatchSnapshot();
+    });
+
+    it('it does not render the component if the flag to display is set to false', () => {
+        const app = shallow(<App />);
+
+        expect(app.find('header')).toHaveLength(1);
+        expect(app.find(GameBoard)).toHaveLength(1);
+    });
 });

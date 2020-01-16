@@ -75,6 +75,7 @@ const ContainerBoard = () => {
             displayBall(false);
             hideButton(true);
 
+            // setTimeOut is just to simulate the shuffle efect, event without the CSS transitions 
             setTimeout(() => {
                 containerPositions.forEach((container, index) => {
                     let newIndex = Math.floor(Math.random() * gameBoardSize);
