@@ -1,0 +1,10 @@
+.containerBoard {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.containerWrapper {
+    height: 6rem;
+    padding: 1rem;
+    width: 6rem;
+}

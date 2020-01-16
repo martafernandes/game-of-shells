@@ -1,7 +1,16 @@
-.container {
+.shell {
     background: radial-gradient(ellipse at top, #deebff, transparent), radial-gradient(ellipse at bottom, #555, transparent);
     border-radius: 50% 50% 10% 10%;
-    flex-wrap: wrap;
     height: 6rem;
+    margin: 0;
+    position: relative;
     width: 6rem;
+}
+
+.shell .ball{
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    margin-top: -1rem;
+    margin-left: -2rem;
 }

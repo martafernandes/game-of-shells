@@ -1,9 +1,7 @@
 import React from 'react';
 
-import constants from '../../config/constants';
-import Button from '../Button/Button';
-import Ball from '../Ball/Ball';
-import ContainerBoard from '../ContainerBoard/ContainerBoard';
+import constants from '../../helpers/constants';
+import GameBoard from '../GameBoard/GameBoard';
 
 import './App.css';
 
@@ -14,9 +12,7 @@ function App() {
         { constants.dictionary.TITLE }
       </header>
       <div>
-        <Button label="cenas" onClick={() => console.log('cenas**')} />
-        <Ball isDisplayed={true} />
-        <ContainerBoard />
+        <GameBoard />
       </div>
     </div>
   );
