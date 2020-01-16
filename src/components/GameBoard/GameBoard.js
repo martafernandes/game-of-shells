@@ -32,15 +32,16 @@ const ContainerBoard = () => {
 
     const onClickContainer = containerIndex => () => {
         containerIndex = containerPositions.findIndex(c => c === containerIndex);
-        console.log(containerIndex === ballPosition && playing)
-        if (containerIndex === ballPosition && playing) {
-            console.log('here')
-            displayBall(true);
-            hideButton(false);
-            setDescription(descriptionSteps.win);
-            setStep(start);
-        } else {
-            setDescription(descriptionSteps.fail);
+
+        if (gameStep === shuffle) {
+            if (containerIndex === ballPosition && playing) {
+                displayBall(true);
+                hideButton(false);
+                setDescription(descriptionSteps.win);
+                setStep(start);
+            } else {
+                setDescription(descriptionSteps.fail);
+            }
         }
     }
 
@@ -53,7 +54,8 @@ const ContainerBoard = () => {
                         key={index}
                         onClick={onClickContainer(index)}
                         content={
-                          index === ballPosition ? <Ball isDisplayed={ballDisplayed} /> : null
+                            containerPositions.findIndex(c => c === index) === ballPosition ?
+                            <Ball isDisplayed={ballDisplayed} /> : null
                         }
                     />
                 }
