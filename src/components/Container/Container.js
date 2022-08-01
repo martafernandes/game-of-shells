@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // eslint-disable-next-line
 import styles from "./Container.css";
 
-const Container = ({ onClick, content }) => (
+const Container = ({ onClick, content, index }) => (
     <figure
         className="container"
         onClick={onClick}
@@ -15,7 +15,7 @@ const Container = ({ onClick, content }) => (
 
 Container.propTypes = {
     onClick: PropTypes.func.isRequired,
-    content: PropTypes.element
+    content: PropTypes.element,
 };
 
 Container.defaultProps = {

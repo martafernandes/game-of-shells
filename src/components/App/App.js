@@ -11,9 +11,7 @@ function App() {
       <header className="App-header">
         { constants.dictionary.TITLE }
       </header>
-      <div>
-        <GameBoard />
-      </div>
+      <GameBoard />
     </div>
   );
 }

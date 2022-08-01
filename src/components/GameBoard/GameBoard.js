@@ -20,13 +20,14 @@ const ContainerBoard = () => {
         descriptionSteps,
         initValues: { gameBoard, containerPos, gameBoardSize }
     } = helpers;
+    
     // because of the animations, we can't setState on this
-    //let containerPositions = containerPos;
+    let containerPositions = [...containerPos];
     
     const [ballDisplayed, displayBall] = useState(false);
     const [playing, hideButton] = useState(false);
     const [gameStep, setStep] = useState(start);
-    const [containerPositions, setContainerPositions] = useState(containerPos);
+   // const [containerPositions, setContainerPositions] = useState(containerPos);
     const [ballPosition, hideBall] = useState(randomBallPosition());
     const [description, setDescription] = useState('');
 
@@ -47,7 +48,7 @@ const ContainerBoard = () => {
 
     const initBoard = () => (
         Array.from(gameBoard, index => 
-            <div className="containerWrapper" key={index}>
+            <div className={`containerWrapper container_${index}`} key={index}>
                 {
                     containerPositions.includes(gameBoard[index]) &&
                     <Container
@@ -70,13 +71,14 @@ const ContainerBoard = () => {
     }
 
     const shuffleGame = () => {
-        for (let i = 0; i < NR_SHUFFLE; i++) {
-            let shuffledContainerPositions = [];
-            displayBall(false);
-            hideButton(true);
+        let i = 0;
+        const shuffledContainerPositions = [];
+        displayBall(false);
+        hideButton(true);
 
-            // setTimeOut is just to simulate the shuffle efect, event without the CSS transitions 
-            setTimeout(() => {
+        // setTimeOut is just to simulate the shuffle efect, event without the CSS transitions 
+        const interval = setInterval(() => {
+            if (i < NR_SHUFFLE) {
                 containerPositions.forEach((container, index) => {
                     let newIndex = Math.floor(Math.random() * gameBoardSize);
         
@@ -84,15 +86,29 @@ const ContainerBoard = () => {
                     while (shuffledContainerPositions.includes(newIndex)) {
                         newIndex = Math.floor(Math.random() * gameBoardSize);
                     }
-                    
+                
+                    const oldElement = document.getElementsByClassName(`container_${index}`)[0]
+                    const newElement = document.getElementsByClassName(`container_${newIndex}`)[0]
+    
+                    const oldY = oldElement.offsetTop;
+                    const oldX = oldElement.offsetLeft;
+
+                    const newY = newElement.offsetTop;
+                    const newX = newElement.offsetLeft;
+
+                    oldElement.style = `transition: transform 1s ease-in-out; transform: translate(${newX - oldX}px, ${newY - oldY}px);`;
+
                     shuffledContainerPositions[index] = newIndex;
                 });
 
-                setContainerPositions(shuffledContainerPositions);
+            // setContainerPositions(shuffledContainerPositions);
                 // set the elements into an array without changing the state
-                //containerPositions = shuffledContainerPositions;
-            }, 800 * i);
-        }
+                containerPositions = [...shuffledContainerPositions];
+                i++;
+            } else {
+                clearInterval(interval);
+            }
+        }, 1000);
 
         setDescription(descriptionSteps.shuffle);
     }
