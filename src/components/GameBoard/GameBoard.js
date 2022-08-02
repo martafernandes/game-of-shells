@@ -27,7 +27,6 @@ const ContainerBoard = () => {
     const [ballDisplayed, displayBall] = useState(false);
     const [playing, hideButton] = useState(false);
     const [gameStep, setStep] = useState(start);
-   // const [containerPositions, setContainerPositions] = useState(containerPos);
     const [ballPosition, hideBall] = useState(randomBallPosition());
     const [description, setDescription] = useState('');
 
@@ -76,10 +75,9 @@ const ContainerBoard = () => {
         displayBall(false);
         hideButton(true);
 
-        // setTimeOut is just to simulate the shuffle efect, event without the CSS transitions 
         const interval = setInterval(() => {
             if (i < NR_SHUFFLE) {
-                containerPositions.forEach((container, index) => {
+                containerPositions.forEach((_, index) => {
                     let newIndex = Math.floor(Math.random() * gameBoardSize);
         
                     // this includes complexitiy but we need to ensure there is no multiple containers in the same position
@@ -101,7 +99,6 @@ const ContainerBoard = () => {
                     shuffledContainerPositions[index] = newIndex;
                 });
 
-            // setContainerPositions(shuffledContainerPositions);
                 // set the elements into an array without changing the state
                 containerPositions = [...shuffledContainerPositions];
                 i++;
