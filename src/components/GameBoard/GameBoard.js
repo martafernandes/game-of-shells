@@ -85,16 +85,12 @@ const ContainerBoard = () => {
                         newIndex = Math.floor(Math.random() * gameBoardSize);
                     }
                 
-                    const oldElement = document.getElementsByClassName(`container_${index}`)[0]
-                    const newElement = document.getElementsByClassName(`container_${newIndex}`)[0]
+                    const oldElement = document.getElementsByClassName(`container_${index}`)[0];
+                    const newElement = document.getElementsByClassName(`container_${newIndex}`)[0];
     
-                    const oldY = oldElement.offsetTop;
-                    const oldX = oldElement.offsetLeft;
+                    const offset = calculateOffset(oldElement, newElement);
 
-                    const newY = newElement.offsetTop;
-                    const newX = newElement.offsetLeft;
-
-                    oldElement.style = `transition: transform 1s ease-in-out; transform: translate(${newX - oldX}px, ${newY - oldY}px);`;
+                    oldElement.style = `transition: transform 1s ease-in-out; transform: translate(${offset.x}px, ${offset.y}px);`;
 
                     shuffledContainerPositions[index] = newIndex;
                 });
@@ -120,6 +116,19 @@ const ContainerBoard = () => {
             }
             default:
                 return () => {};
+        }
+    }
+
+    const calculateOffset = (oldElem, newElem) => {
+        const oldY = oldElem.offsetTop;
+        const oldX = oldElem.offsetLeft;
+
+        const newY = newElem.offsetTop;
+        const newX = newElem.offsetLeft;
+
+        return {
+            x: newX - oldX,
+            y: newY - oldY
         }
     }
 
