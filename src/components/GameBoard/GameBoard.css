@@ -1,13 +1,12 @@
 .containerBoard {
-    display: flex;
+    display: inline-flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .containerWrapper {
     height: 6rem;
-    /* TODO: set this property dynamically on JS to support NR_SHELLS per row */
-    width: calc(100% * (1/3) - 1rem);
+    width: 6rem;
     margin: 0.5rem;
 }
 

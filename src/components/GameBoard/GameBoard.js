@@ -12,7 +12,7 @@ import styles from "./GameBoard.css";
 const ContainerBoard = () => {
     const { 
         dictionary,
-        gameOptions: { NR_SHUFFLE }
+        gameOptions: { NR_SHUFFLE, NR_CONTAINERS }
     } = constants;
     const {
         gameSteps: { start, shuffle },
@@ -125,7 +125,7 @@ const ContainerBoard = () => {
 
     return (
         <div className="gameBoard">
-            <div className="containerBoard">
+            <div className="containerBoard" style={{ width: `${7 * NR_CONTAINERS}rem` }}>
                 {
                     initBoard()
                 }
