@@ -21,8 +21,4 @@ export default {
         win: 'Yeah!!',
     },
     randomBallPosition: () => Math.floor(Math.random() * NR_CONTAINERS),
-    /*shuffleContainers: (containerPosition, containerIndex, gameBoard) => {
-        const randomIndex = Math.floor(Math.random() * gameBoardSize);
-        const newPositionI = 
-    }*/
 }
