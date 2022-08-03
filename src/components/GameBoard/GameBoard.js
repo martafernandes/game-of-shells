@@ -20,7 +20,6 @@ const ContainerBoard = () => {
         descriptionSteps,
         initValues: { gameBoard, containerPos, gameBoardSize }
     } = helpers;
-    const ballPosition = randomBallPosition();
     
     // because of the animations, we can't setState on this
     let containerPositions = [...containerPos];
@@ -29,6 +28,7 @@ const ContainerBoard = () => {
     const [playing, hideButton] = useState(false);
     const [gameStep, setStep] = useState(start);
     const [description, setDescription] = useState('');
+    const [ballPosition] = useState(randomBallPosition());
 
     const onClickContainer = containerIndex => () => {
         containerIndex = containerPositions.findIndex(c => c === containerIndex);
@@ -74,8 +74,11 @@ const ContainerBoard = () => {
         const shuffledContainerPositions = [];
         displayBall(false);
         hideButton(true);
+        setDescription(descriptionSteps.readyStart);
 
         const interval = setInterval(() => {
+            setDescription(descriptionSteps.shuffle);
+
             if (i < NR_SHUFFLE) {
                 containerPositions.forEach((_, index) => {
                     let newIndex = Math.floor(Math.random() * gameBoardSize);
@@ -102,8 +105,6 @@ const ContainerBoard = () => {
                 clearInterval(interval);
             }
         }, 1000);
-
-        setDescription(descriptionSteps.shuffle);
     }
 
     const onClickButton = () => {
@@ -139,7 +140,7 @@ const ContainerBoard = () => {
                     initBoard()
                 }
             </div>
-            <div className="description">{description}</div>
+            <p className="description">{description}</p>
             {!playing && <Button label={dictionary[gameStep]} onClick={onClickButton} />}
         </div>
     );
