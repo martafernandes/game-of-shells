@@ -140,7 +140,7 @@ const ContainerBoard = () => {
                 }
             </div>
             <div className="description">{description}</div>
-            {!playing && <Button label={dictionary[gameStep]} onClick={() => onClickButton()} />}
+            {!playing && <Button label={dictionary[gameStep]} onClick={onClickButton} />}
         </div>
     );
 };
