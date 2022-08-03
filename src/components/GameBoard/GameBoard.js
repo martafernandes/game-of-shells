@@ -20,6 +20,7 @@ const ContainerBoard = () => {
         descriptionSteps,
         initValues: { gameBoard, containerPos, gameBoardSize }
     } = helpers;
+    const ballPosition = randomBallPosition();
     
     // because of the animations, we can't setState on this
     let containerPositions = [...containerPos];
@@ -27,7 +28,6 @@ const ContainerBoard = () => {
     const [ballDisplayed, displayBall] = useState(false);
     const [playing, hideButton] = useState(false);
     const [gameStep, setStep] = useState(start);
-    const [ballPosition, hideBall] = useState(randomBallPosition());
     const [description, setDescription] = useState('');
 
     const onClickContainer = containerIndex => () => {
