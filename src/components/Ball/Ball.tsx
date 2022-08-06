@@ -8,8 +8,9 @@ const css: CSS.Properties = {
     height: '3rem',
     width: '3rem',
     position: 'absolute',
-    bottom: '0',
-    left: '25%',
+    top: '50%', 
+    left: '50%',
+    transform: 'translate(-50%, -25%)',
 };
 
 const Ball = ({
