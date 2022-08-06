@@ -4,7 +4,7 @@ import Ball from '../Ball/Ball';
 import Button from '../Button/Button';
 import Container from '../Container/Container';
 import constants from '../../helpers/constants';
-import helpers from './helpers';
+import helpers from '../../helpers/helpers';
 
 // eslint-disable-next-line
 import styles from "./GameBoard.css";

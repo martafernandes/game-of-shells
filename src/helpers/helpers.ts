@@ -1,7 +1,7 @@
-import constants from '../../helpers/constants';
+import constants from './constants';
 
 const { gameOptions: { NR_CONTAINERS }} = constants;
-const gameBoardSize = NR_CONTAINERS * NR_CONTAINERS;
+const gameBoardSize: number = NR_CONTAINERS * NR_CONTAINERS;
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
