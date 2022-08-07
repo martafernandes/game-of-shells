@@ -16,10 +16,10 @@ const css: CSS.Properties = {
 const Ball = ({
     isDisplayed,
 }: Props) => (
-    isDisplayed && <figure
+    isDisplayed ? <figure
         style={css}
     >
-    </figure>
+    </figure> : null
 );
 
 type Props = {

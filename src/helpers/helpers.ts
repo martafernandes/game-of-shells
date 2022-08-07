@@ -1,26 +1,21 @@
-import constants from './constants';
+import { gameOptions } from './constants';
 
-const { gameOptions: { NR_CONTAINERS }} = constants;
+const { NR_CONTAINERS } = gameOptions;
 const gameBoardSize: number = NR_CONTAINERS * NR_CONTAINERS;
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
-    initValues: {
-        gameBoardSize,
-        gameBoard: Array.from(Array(gameBoardSize), (v, i) => i),
-        containerPos: Array.from(Array(NR_CONTAINERS), (v, i) => i),
-    },
-    gameSteps: {
-        start: 'START',
-        shuffle: 'SHUFFLE',
-        playing: 'PLAYING',
-    },
-    descriptionSteps: {
+
+export const initValues ={
+    gameBoardSize,
+    gameBoard: Array.from(Array(gameBoardSize), (v, i) => i),
+    containerPos: Array.from(Array(NR_CONTAINERS), (v, i) => i),
+};
+
+export const descriptionSteps = {
         start: 'Please pay attention where the ball is hidden.',
         readyStart: 'Ready... go!',
         shuffle: 'Do you still remember where the ball is hidden? Give it a try!',
         fail: 'Sorry... you failed...',
         win: 'Yeah!!',
-    },
-    randomBallPosition: () => Math.floor(Math.random() * NR_CONTAINERS),
-}
+};
+
+export const randomBallPosition = () => Math.floor(Math.random() * NR_CONTAINERS);

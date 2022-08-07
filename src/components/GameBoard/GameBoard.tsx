@@ -3,42 +3,56 @@ import React, { useState } from 'react';
 import Ball from '../Ball/Ball';
 import Button from '../Button/Button';
 import Container from '../Container/Container';
-import constants from '../../helpers/constants';
-import helpers from '../../helpers/helpers';
+import {dictionary, gameOptions} from '../../helpers/constants';
+import {randomBallPosition, descriptionSteps, initValues } from '../../helpers/helpers';
+import { gameSteps } from '../../helpers/helpers.interface';
+import type * as CSS from 'csstype';
 
-// eslint-disable-next-line
-import styles from "./GameBoard.css";
+const containerBoardCSS: CSS.Properties = {
+    display: 'inline-flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    border: '0.1rem dotted dimgrey',
+    padding: '1rem',
+    width: `${7 * gameOptions.NR_CONTAINERS}rem`,
+};
+
+const containerWrapperCSS: CSS.Properties = {
+    height: '6rem',
+    width: '6rem',
+    margin: '0.5rem',
+};
+
+const descriptionCSS: CSS.Properties = {
+    marginTop: '2rem',
+    fontSize: 'calc(2vmin)',
+}
 
 const ContainerBoard = () => {
-    const { 
-        dictionary,
-        gameOptions: { NR_SHUFFLE, NR_CONTAINERS }
-    } = constants;
+    const { NR_SHUFFLE, NR_CONTAINERS } = gameOptions;
+    const { START, SHUFFLE } = gameSteps;
     const {
-        gameSteps: { start, shuffle },
-        randomBallPosition,
-        descriptionSteps,
-        initValues: { gameBoard, containerPos, gameBoardSize }
-    } = helpers;
+        gameBoard, containerPos, gameBoardSize 
+    } = initValues;
     
     // because of the animations, we can't setState on this
     let containerPositions = [...containerPos];
     
     const [ballDisplayed, displayBall] = useState(false);
     const [playing, hideButton] = useState(false);
-    const [gameStep, setStep] = useState(start);
+    const [gameStep, setStep] = useState(START);
     const [description, setDescription] = useState('');
     const [ballPosition] = useState(randomBallPosition());
 
-    const onClickContainer = containerIndex => () => {
+    const onClickContainer = (containerIndex: number) => () => {
         containerIndex = containerPositions.findIndex(c => c === containerIndex);
 
-        if (gameStep === shuffle) {
+        if (gameStep === SHUFFLE) {
             if (containerIndex === ballPosition && playing) {
                 displayBall(true);
                 hideButton(false);
                 setDescription(descriptionSteps.win);
-                setStep(start);
+                setStep(START);
             } else {
                 setDescription(descriptionSteps.fail);
             }
@@ -47,7 +61,7 @@ const ContainerBoard = () => {
 
     const initBoard = () => (
         Array.from(gameBoard, index => 
-            <div className={`containerWrapper container_${index}`} key={index}>
+            <div style={containerWrapperCSS} className={`container_${index}`} key={index}>
                 {
                     containerPositions.includes(gameBoard[index]) &&
                     <Container
@@ -55,7 +69,7 @@ const ContainerBoard = () => {
                         onClick={onClickContainer(index)}
                         content={
                             containerPositions.findIndex(c => c === index) === ballPosition ?
-                            <Ball isDisplayed={ballDisplayed} /> : null
+                            <Ball isDisplayed={ballDisplayed} /> : undefined
                         }
                     />
                 }
@@ -65,13 +79,13 @@ const ContainerBoard = () => {
 
     const startGame = () => {
         displayBall(true);
-        setStep(shuffle);
+        setStep(SHUFFLE);
         setDescription(descriptionSteps.start);
     }
 
     const shuffleGame = () => {
         let i = 0;
-        const shuffledContainerPositions = [];
+        const shuffledContainerPositions: number[] = [];
         displayBall(false);
         hideButton(true);
         setDescription(descriptionSteps.readyStart);
@@ -80,20 +94,20 @@ const ContainerBoard = () => {
             setDescription(descriptionSteps.shuffle);
 
             if (i < NR_SHUFFLE) {
-                containerPositions.forEach((_, index) => {
-                    let newIndex = Math.floor(Math.random() * gameBoardSize);
+                containerPositions.forEach((_, index: number) => {
+                    let newIndex: number = Math.floor(Math.random() * gameBoardSize);
         
                     // this includes complexitiy but we need to ensure there is no multiple containers in the same position
                     while (shuffledContainerPositions.includes(newIndex)) {
                         newIndex = Math.floor(Math.random() * gameBoardSize);
                     }
                 
-                    const oldElement = document.getElementsByClassName(`container_${index}`)[0];
-                    const newElement = document.getElementsByClassName(`container_${newIndex}`)[0];
+                    const oldElement: Element = document.getElementsByClassName(`container_${index}`)[0];
+                    const newElement: Element = document.getElementsByClassName(`container_${newIndex}`)[0];
     
-                    const offset = calculateOffset(oldElement, newElement);
+                    const offset = calculateOffset(oldElement as HTMLElement, newElement as HTMLElement);
 
-                    oldElement.style = `transition: transform 1s ease-in-out; transform: translate(${offset.x}px, ${offset.y}px);`;
+                    oldElement.setAttribute('style',`transition: transform 1s ease-in-out; transform: translate(${offset.x}px, ${offset.y}px);`);
 
                     shuffledContainerPositions[index] = newIndex;
                 });
@@ -109,10 +123,10 @@ const ContainerBoard = () => {
 
     const onClickButton = () => {
         switch (gameStep) {
-            case start: {
+            case START: {
                 return startGame();
             }
-            case shuffle: {
+            case SHUFFLE: {
                 return shuffleGame();
             }
             default:
@@ -120,7 +134,7 @@ const ContainerBoard = () => {
         }
     }
 
-    const calculateOffset = (oldElem, newElem) => {
+    const calculateOffset = (oldElem: HTMLElement, newElem: HTMLElement) => {
         const oldY = oldElem.offsetTop;
         const oldX = oldElem.offsetLeft;
 
@@ -133,15 +147,27 @@ const ContainerBoard = () => {
         }
     }
 
+    const getStringForStep = (): string => {
+
+        switch(gameStep) {
+            case gameSteps.START:
+                return dictionary.START;
+            case gameSteps.SHUFFLE:
+                return dictionary.SHUFFLE;
+            default:
+                return '' ;       
+        }
+    }
+
     return (
         <div className="gameBoard">
-            <div className="containerBoard" style={{ width: `${7 * NR_CONTAINERS}rem` }}>
+            <div style={containerBoardCSS}>
                 {
                     initBoard()
                 }
             </div>
-            <p className="description">{description}</p>
-            {!playing && <Button label={dictionary[gameStep]} onClick={onClickButton} />}
+            <p style={descriptionCSS}>{description}</p>
+            {!playing && <Button label={getStringForStep()} onClick={onClickButton} />}
         </div>
     );
 };
