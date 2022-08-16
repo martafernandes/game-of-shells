@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import Ball from '../Ball/Ball';
 import Button from '../Button/Button';
 import Container from '../Container/Container';
-import {dictionary, gameOptions} from '../../helpers/constants';
-import {randomBallPosition, descriptionSteps, initValues } from '../../helpers/helpers';
+import {dictionary, gameOptions, descriptionSteps} from '../../helpers/constants';
+import {randomBallPosition, initValues } from '../../helpers/helpers';
 import { gameSteps } from '../../helpers/helpers.interface';
 import type * as CSS from 'csstype';
 

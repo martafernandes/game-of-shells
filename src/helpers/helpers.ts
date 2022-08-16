@@ -10,12 +10,4 @@ export const initValues ={
     containerPos: Array.from(Array(NR_CONTAINERS), (v, i) => i),
 };
 
-export const descriptionSteps = {
-        start: 'Please pay attention where the ball is hidden.',
-        readyStart: 'Ready... go!',
-        shuffle: 'Do you still remember where the ball is hidden? Give it a try!',
-        fail: 'Sorry... you failed...',
-        win: 'Yeah!!',
-};
-
 export const randomBallPosition = () => Math.floor(Math.random() * NR_CONTAINERS);
