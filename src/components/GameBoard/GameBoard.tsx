@@ -29,7 +29,7 @@ const descriptionCSS: CSS.Properties = {
 }
 
 const ContainerBoard = () => {
-    const { NR_SHUFFLE, NR_CONTAINERS } = gameOptions;
+    const { NR_SHUFFLE } = gameOptions;
     const { START, SHUFFLE } = gameSteps;
     const {
         gameBoard, containerPos, gameBoardSize 
