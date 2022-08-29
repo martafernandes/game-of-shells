@@ -10,10 +10,11 @@ const css: CSS.Properties = {
     width: '6rem',
 }
 
-const Container = ({ onClick, content }: Props) => (
+const Container = ({ onClick, content, className }: Props) => (
     <figure
         style={css}
         onClick={onClick}
+        className={className}
     >
             {content}
     </figure>
@@ -22,6 +23,7 @@ const Container = ({ onClick, content }: Props) => (
 type Props = {
     onClick: MouseEventHandler,
     content?: ReactElement,
+    className?: string
 };
 
 export default Container;

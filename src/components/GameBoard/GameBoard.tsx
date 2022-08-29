@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import Ball from '../Ball/Ball';
 import Button from '../Button/Button';
@@ -71,6 +71,7 @@ const ContainerBoard = () => {
                             containerPositions.findIndex(c => c === index) === ballPosition ?
                             <Ball isDisplayed={ballDisplayed} /> : undefined
                         }
+                        className={ballDisplayed ? 'selected' : ''}
                     />
                 }
             </div>    
