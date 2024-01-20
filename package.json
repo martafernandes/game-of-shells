@@ -13,21 +13,23 @@
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@typescript-eslint/parser": "^5.32.0",
+    "@vitejs/plugin-react": "^4.2.1",
     "csstype": "^3.1.0",
     "eslint": "^8.56.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-react": "^7.33.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "^5.0.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12",
+    "vite-plugin-svgr": "^4.2.0",
+    "vite-tsconfig-paths": "^4.3.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
+    "start": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
+  },  
   "eslintConfig": {
     "extends": "react-app"
   },
