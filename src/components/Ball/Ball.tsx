@@ -1,7 +1,7 @@
 import React from 'react';
 import type * as CSS from 'csstype';
 
-const css: CSS.Properties = {
+const css: React.CSSProperties = {
     background: 'radial-gradient(circle at 2rem 2rem, #5cabff, #000)',
     borderRadius: '50%',
     margin: '0',
@@ -13,6 +13,7 @@ const css: CSS.Properties = {
     transform: 'translate(-50%, -25%)',
 };
 
+/* Ball component */
 const Ball = ({
     isDisplayed,
 }: Props): React.ReactElement | null => (
