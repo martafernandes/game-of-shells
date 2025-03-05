@@ -15,7 +15,7 @@ const css: CSS.Properties = {
 
 const Ball = ({
     isDisplayed,
-}: Props): React.ReactElement => (
+}: Props): React.ReactElement | null => (
     isDisplayed ? <figure
         style={css}
     >
